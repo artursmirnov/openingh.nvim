@@ -1,7 +1,7 @@
 local utils = require("openingh.utils")
 local M = {}
 
-function M.setup(opts)
+function M.setup()
   -- get the current working directory and set the url
   local current_buffer = vim.fn.expand("%:p:h")
   local repo_url = vim.fn.system("git -C " .. current_buffer .. " config --get remote.origin.url")
@@ -19,7 +19,7 @@ function M.setup(opts)
     return
   end
 
-  local user_or_org = opts.user_or_org or gh.user_or_org
+  local user_or_org = vim.g.openingh_user_or_org or gh.user_or_org
 
   M.repo_url = string.format("http://%s/%s/%s", gh.host, user_or_org, gh.reponame)
 end
